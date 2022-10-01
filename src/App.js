@@ -9,7 +9,7 @@ import { fromLonLat, get } from "ol/proj";
 import GeoJSON from "ol/format/GeoJSON";
 import { Controls, FullScreenControl } from "./Controls";
 import FeatureStyles from "./Features/Styles";
-
+import { ListItemWrapper } from "./List/ListItemWrapper";
 import mapConfig from "./config.json";
 import "./App.css";
 
@@ -42,8 +42,8 @@ const App = () => {
   const [center, setCenter] = useState(mapConfig.center);
   const [zoom, setZoom] = useState(9);
 
-  const [showLayer1, setShowLayer1] = useState(true);
-  const [showLayer2, setShowLayer2] = useState(true);
+  const [showLayer1, setShowLayer1] = useState(false);
+  const [showLayer2, setShowLayer2] = useState(false);
   const [showMarker, setShowMarker] = useState(false);
 
   const markersLonLat = [mapConfig.kansasCityLonLat, mapConfig.blueSpringsLonLat];
@@ -72,7 +72,7 @@ const App = () => {
       <Map center={fromLonLat(center)} zoom={zoom}>
         <Layers>
           <TileLayer source={osm()} zIndex={0} />
-          {showLayer1 && (
+          {/* {showLayer1 && (
             <VectorLayer
               source={vector({
                 features: new GeoJSON().readFeatures(geojsonObject, {
@@ -91,14 +91,14 @@ const App = () => {
               })}
               style={FeatureStyles.MultiPolygon}
             />
-          )}
+          )} */}
           {showMarker && <VectorLayer source={vector({ features })} />}
         </Layers>
         <Controls>
           <FullScreenControl />
         </Controls>
       </Map>
-      <div>
+      {/* <div>
         <input
           type="checkbox"
           checked={showLayer1}
@@ -113,7 +113,7 @@ const App = () => {
           onChange={(event) => setShowLayer2(event.target.checked)}
         />
         Wyandotte County
-      </div>
+      </div> */}
       <hr />
       <div>
         <input
