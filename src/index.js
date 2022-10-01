@@ -8,7 +8,6 @@ import * as serviceWorker from './serviceWorker';
 ReactDOM.render(
   <React.StrictMode>
     <div className='logisticPage'>
-      <div className='list'><ListItemWrapper /></div>
       <App />
     </div>
   </React.StrictMode>,

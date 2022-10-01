@@ -9,7 +9,7 @@ import { fromLonLat, get } from "ol/proj";
 import GeoJSON from "ol/format/GeoJSON";
 import { Controls, FullScreenControl } from "./Controls";
 import FeatureStyles from "./Features/Styles";
-import { ListItemWrapper } from "./List/ListItemWrapper";
+import ListItemWrapper from "./List/ListItemWrapper";
 import mapConfig from "./config.json";
 import "./App.css";
 
@@ -68,11 +68,21 @@ const App = () => {
   }
 
   return (
-    <div>
-      <Map center={fromLonLat(center)} zoom={zoom}>
-        <Layers>
-          <TileLayer source={osm()} zIndex={0} />
-          {/* {showLayer1 && (
+    <div className='deliveryPage'>
+      <div className='list'>
+        <ListItemWrapper
+          onAddCoordinatesOnMap={() => onAddCoordinatesOnMap}
+          setApoint={() => setApoint}
+          setBpoint={() => setBpoint}
+          aPoint={aPoint}
+          bPoint={bPoint}
+        />
+      </div>
+      <div>
+        <Map center={fromLonLat(center)} zoom={zoom}>
+          <Layers>
+            <TileLayer source={osm()} zIndex={0} />
+            {/* {showLayer1 && (
             <VectorLayer
               source={vector({
                 features: new GeoJSON().readFeatures(geojsonObject, {
@@ -92,13 +102,13 @@ const App = () => {
               style={FeatureStyles.MultiPolygon}
             />
           )} */}
-          {showMarker && <VectorLayer source={vector({ features })} />}
-        </Layers>
-        <Controls>
-          <FullScreenControl />
-        </Controls>
-      </Map>
-      {/* <div>
+            {showMarker && <VectorLayer source={vector({ features })} />}
+          </Layers>
+          <Controls>
+            <FullScreenControl />
+          </Controls>
+        </Map>
+        {/* <div>
         <input
           type="checkbox"
           checked={showLayer1}
@@ -114,28 +124,29 @@ const App = () => {
         />
         Wyandotte County
       </div> */}
-      <hr />
-      <div>
-        <input
-          type="checkbox"
-          checked={showMarker}
-          onChange={(event) => setShowMarker(event.target.checked)}
-        />
-        Show markers
+        <hr />
+        <div>
+          <input
+            type="checkbox"
+            checked={showMarker}
+            onChange={(event) => setShowMarker(event.target.checked)}
+          />
+          Show markers
+        </div>
+        <div>
+          <input
+            onChange={(event) => setApoint(event.target.value)}
+          />
+          Ввести координаты точки А
+        </div>
+        <div>
+          <input
+            onChange={(event) => setBpoint(event.target.value)}
+          />
+          Ввести координаты точки В
+        </div>
+        <button onClick={() => onAddCoordinatesOnMap(aPoint, bPoint)}>Добавить координаты точек на карту</button>
       </div>
-      <div>
-        <input
-          onChange={(event) => setApoint(event.target.value)}
-        />
-        Ввести координаты точки А
-      </div>
-      <div>
-        <input
-          onChange={(event) => setBpoint(event.target.value)}
-        />
-        Ввести координаты точки В
-      </div>
-      <button onClick={() => onAddCoordinatesOnMap(aPoint, bPoint)}>Добавить координаты точек на карту</button>
     </div>
   );
 };

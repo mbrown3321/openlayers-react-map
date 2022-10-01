@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import './ListItem.css';
 
-export const ListItem = ({ key, pointA, pointB }) => {
+export const ListItem = ({ key, pointA, pointB, onAddCoordinatesOnMap, setApoint, setBpoint, aPoint, bPoint }) => {
     return (
         <div key={key}>
             <h4>first delivery item</h4>
@@ -9,20 +9,20 @@ export const ListItem = ({ key, pointA, pointB }) => {
                 <div>
                     <input
                         placeholder={pointA}
-                    // onChange={(event) => setApoint(event.target.value)}
+                        onChange={(event) => setApoint(event.target.value)}
                     />
                     Ввести координаты точки А
                 </div>
                 <div>
                     <input
                         placeholder={pointB}
-                    // onChange={(event) => setBpoint(event.target.value)}
+                        onChange={(event) => setBpoint(event.target.value)}
                     />
                     Ввести координаты точки В
                 </div>
             </div>
             <button
-            // onClick={() => onAddCoordinatesOnMap(aPoint, bPoint)}
+                onClick={() => onAddCoordinatesOnMap(aPoint, bPoint)}
             >Добавить координаты точек на карту</button>
         </div>
     )
