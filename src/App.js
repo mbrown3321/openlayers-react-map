@@ -12,6 +12,8 @@ import FeatureStyles from "./Features/Styles";
 import ListItemWrapper from "./List/ListItemWrapper";
 import mapConfig from "./config.json";
 import "./App.css";
+import * as data from './List/deliveryItems.json';
+
 
 const geojsonObject = mapConfig.geojsonObject;
 const geojsonObject2 = mapConfig.geojsonObject2;
@@ -46,6 +48,8 @@ const App = () => {
   const [showLayer2, setShowLayer2] = useState(false);
   const [showMarker, setShowMarker] = useState(false);
 
+  const listItems = data.items;
+
   const markersLonLat = [mapConfig.kansasCityLonLat, mapConfig.blueSpringsLonLat];
   // const [features, setFeatures] = useState(addMarkers(markersLonLat));
   const [features, setFeatures] = useState();
@@ -56,6 +60,10 @@ const App = () => {
 
   const [aPoint, setApoint] = useState('');
   const [bPoint, setBpoint] = useState('');
+
+  useEffect(() => {
+    console.log('aPoint ', aPoint)
+  }, [aPoint])
 
   const onAddCoordinatesOnMap = (a, b) => {
     console.log(a, b)
@@ -70,13 +78,48 @@ const App = () => {
   return (
     <div className='deliveryPage'>
       <div className='list'>
-        <ListItemWrapper
+        {/* <ListItemWrapper
           onAddCoordinatesOnMap={() => onAddCoordinatesOnMap}
           setApoint={() => setApoint}
           setBpoint={() => setBpoint}
           aPoint={aPoint}
           bPoint={bPoint}
-        />
+        /> */}
+        {
+          listItems.map((item) => {
+            return (
+              <div className="listItemWrapper">
+                {/* <ListItem key={item.key} pointA={item.pointA} pointB={item.pointB}
+                        setApoint={() => setApoint}
+                        setBpoint={() => setBpoint}
+                        onAddCoordinatesOnMap={() => onAddCoordinatesOnMap} 
+                        /> */}
+                <div key={item.key}>
+                  <h4>first delivery item</h4>
+                  <div className="wrapper">
+                    <div>
+                      <input
+                        placeholder={item.pointA}
+                        onChange={(event) => setApoint(event.target.value)}
+                      />
+                      Ввести координаты точки А
+                    </div>
+                    <div>
+                      <input
+                        placeholder={item.pointB}
+                        onChange={(event) => setBpoint(event.target.value)}
+                      />
+                      Ввести координаты точки В
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => onAddCoordinatesOnMap(aPoint, bPoint)}
+                  >Добавить координаты точек на карту</button>
+                </div>
+              </div>
+            )
+          })
+        }
       </div>
       <div>
         <Map center={fromLonLat(center)} zoom={zoom}>

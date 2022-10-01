@@ -22,7 +22,7 @@ export const ListItem = ({ key, pointA, pointB, onAddCoordinatesOnMap, setApoint
                 </div>
             </div>
             <button
-                onClick={() => onAddCoordinatesOnMap(aPoint, bPoint)}
+                onClick={onAddCoordinatesOnMap(aPoint, bPoint)}
             >Добавить координаты точек на карту</button>
         </div>
     )
