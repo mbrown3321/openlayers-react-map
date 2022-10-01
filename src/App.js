@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Map from "./Map";
 import { Layers, TileLayer, VectorLayer } from "./Layers";
 import { Style, Icon } from "ol/style";
@@ -15,9 +15,10 @@ import "./App.css";
 
 const geojsonObject = mapConfig.geojsonObject;
 const geojsonObject2 = mapConfig.geojsonObject2;
-const markersLonLat = [mapConfig.kansasCityLonLat, mapConfig.blueSpringsLonLat];
+// const markersLonLat = [mapConfig.kansasCityLonLat, mapConfig.blueSpringsLonLat];
 
 function addMarkers(lonLatArray) {
+  console.log('lonLatArray ', lonLatArray)
   var iconStyle = new Style({
     image: new Icon({
       anchorXUnits: "fraction",
@@ -35,6 +36,8 @@ function addMarkers(lonLatArray) {
   return features;
 }
 
+//  [-94.9065, 38.9884],  [-94.6108, 38.846]
+
 const App = () => {
   const [center, setCenter] = useState(mapConfig.center);
   const [zoom, setZoom] = useState(9);
@@ -43,7 +46,26 @@ const App = () => {
   const [showLayer2, setShowLayer2] = useState(true);
   const [showMarker, setShowMarker] = useState(false);
 
-  const [features, setFeatures] = useState(addMarkers(markersLonLat));
+  const markersLonLat = [mapConfig.kansasCityLonLat, mapConfig.blueSpringsLonLat];
+  // const [features, setFeatures] = useState(addMarkers(markersLonLat));
+  const [features, setFeatures] = useState();
+
+  useEffect(() => {
+    console.log('features ', features)
+  }, [features])
+
+  const [aPoint, setApoint] = useState('');
+  const [bPoint, setBpoint] = useState('');
+
+  const onAddCoordinatesOnMap = (a, b) => {
+    console.log(a, b)
+    const aNumX = a.split(',')[0];
+    const aNumY = a.split(',')[1];
+    const bNumX = b.split(',')[0];
+    const bNumY = b.split(',')[1];
+    // console.log('aNum ', Number(aNum))
+    setFeatures(addMarkers([[Number(aNumX), Number(aNumY)], [Number(bNumX), Number(bNumY)]]));
+  }
 
   return (
     <div>
@@ -81,7 +103,7 @@ const App = () => {
           type="checkbox"
           checked={showLayer1}
           onChange={(event) => setShowLayer1(event.target.checked)}
-        />{" "}
+        />
         Johnson County
       </div>
       <div>
@@ -89,7 +111,7 @@ const App = () => {
           type="checkbox"
           checked={showLayer2}
           onChange={(event) => setShowLayer2(event.target.checked)}
-        />{" "}
+        />
         Wyandotte County
       </div>
       <hr />
@@ -98,9 +120,22 @@ const App = () => {
           type="checkbox"
           checked={showMarker}
           onChange={(event) => setShowMarker(event.target.checked)}
-        />{" "}
+        />
         Show markers
       </div>
+      <div>
+        <input
+          onChange={(event) => setApoint(event.target.value)}
+        />
+        Ввести координаты точки А
+      </div>
+      <div>
+        <input
+          onChange={(event) => setBpoint(event.target.value)}
+        />
+        Ввести координаты точки В
+      </div>
+      <button onClick={() => onAddCoordinatesOnMap(aPoint, bPoint)}>Добавить координаты точек на карту</button>
     </div>
   );
 };
