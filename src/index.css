@@ -15,3 +15,8 @@ code {
 .logisticPage {
   display: flex;
 }
+
+
+.list{
+  display: block !important;
+}
