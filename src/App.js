@@ -9,7 +9,7 @@ import { fromLonLat, get } from "ol/proj";
 import GeoJSON from "ol/format/GeoJSON";
 import { Controls, FullScreenControl } from "./Controls";
 import FeatureStyles from "./Features/Styles";
-import ListItemWrapper from "./List/ListItemWrapper";
+// import ListItemWrapper from "./List/ListItemWrapper";
 import mapConfig from "./config.json";
 import "./App.css";
 import * as data from './List/deliveryItems.json';
@@ -47,148 +47,92 @@ const App = () => {
   const [showLayer1, setShowLayer1] = useState(false);
   const [showLayer2, setShowLayer2] = useState(false);
   const [showMarker, setShowMarker] = useState(false);
+  const [isShown, showPoints] = useState(true);
 
   const listItems = data.items;
+  const [deliveryItems, setDeliveryItems] = useState(listItems);
 
   const markersLonLat = [mapConfig.kansasCityLonLat, mapConfig.blueSpringsLonLat];
   // const [features, setFeatures] = useState(addMarkers(markersLonLat));
   const [features, setFeatures] = useState();
+  const [featuresNew, setNewFeatures] = useState(features);
 
-  useEffect(() => {
-    console.log('features ', features)
-  }, [features])
 
-  const [aPoint, setApoint] = useState('');
-  const [bPoint, setBpoint] = useState('');
-
-  useEffect(() => {
-    console.log('aPoint ', aPoint)
-  }, [aPoint])
+  // const [aPoint, setApoint] = useState('');
+  // const [bPoint, setBpoint] = useState('');
 
   const onAddCoordinatesOnMap = (a, b) => {
-    console.log(a, b)
-    const aNumX = a.split(',')[0];
-    const aNumY = a.split(',')[1];
-    const bNumX = b.split(',')[0];
-    const bNumY = b.split(',')[1];
-    // console.log('aNum ', Number(aNum))
+    const aNumX = a?.split(',')[0];
+    const aNumY = a?.split(',')[1];
+    const bNumX = b?.split(',')[0];
+    const bNumY = b?.split(',')[1];
     setFeatures(addMarkers([[Number(aNumX), Number(aNumY)], [Number(bNumX), Number(bNumY)]]));
+  }
+
+  const EachItem = (item) => {
+    const eachItem = item.item;
+    const [aPoint, setApoint] = useState(eachItem.pointA);
+    const [bPoint, setBpoint] = useState(eachItem.pointB);
+    const [eachMarker, setEachMarker] = useState(false);
+    item.item.pointA = aPoint;
+    item.item.pointB = bPoint;
+    return (
+      <div className="listItemWrapper">
+        <div >
+          <h4>first delivery item</h4>
+          <div className="wrapper">
+            <div>
+              <input
+                placeholder={eachItem.pointA}
+                value={item.item.pointA}
+                onChange={(event) => setApoint(event.target.value)}
+              />
+              Ввести координаты точки А
+            </div>
+            <div>
+              <input
+                placeholder={eachItem.pointB}
+                value={item.item.pointB}
+                onChange={(event) => setBpoint(event.target.value)}
+              />
+              Ввести координаты точки В
+            </div>
+          </div>
+          <button onClick={() => onAddCoordinatesOnMap(aPoint, bPoint)}>Добавить координаты точек на карту</button>
+          <div>
+            <input
+              type="checkbox"
+              checked={eachMarker}
+              onChange={(event) => {
+                setShowMarker(event.target.checked)
+                setEachMarker(showMarker)
+              }}
+            />
+            Показать точки на карте
+          </div>
+        </div>
+      </div>
+    )
   }
 
   return (
     <div className='deliveryPage'>
       <div className='list'>
-        {/* <ListItemWrapper
-          onAddCoordinatesOnMap={() => onAddCoordinatesOnMap}
-          setApoint={() => setApoint}
-          setBpoint={() => setBpoint}
-          aPoint={aPoint}
-          bPoint={bPoint}
-        /> */}
         {
-          listItems.map((item) => {
-            return (
-              <div className="listItemWrapper">
-                {/* <ListItem key={item.key} pointA={item.pointA} pointB={item.pointB}
-                        setApoint={() => setApoint}
-                        setBpoint={() => setBpoint}
-                        onAddCoordinatesOnMap={() => onAddCoordinatesOnMap} 
-                        /> */}
-                <div key={item.key}>
-                  <h4>first delivery item</h4>
-                  <div className="wrapper">
-                    <div>
-                      <input
-                        placeholder={item.pointA}
-                        onChange={(event) => setApoint(event.target.value)}
-                      />
-                      Ввести координаты точки А
-                    </div>
-                    <div>
-                      <input
-                        placeholder={item.pointB}
-                        onChange={(event) => setBpoint(event.target.value)}
-                      />
-                      Ввести координаты точки В
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => onAddCoordinatesOnMap(aPoint, bPoint)}
-                  >Добавить координаты точек на карту</button>
-                </div>
-              </div>
-            )
-          })
+          listItems.map((item) => <EachItem item={item} key={item.key} />)
         }
       </div>
       <div>
+        <hr />
         <Map center={fromLonLat(center)} zoom={zoom}>
           <Layers>
             <TileLayer source={osm()} zIndex={0} />
-            {/* {showLayer1 && (
-            <VectorLayer
-              source={vector({
-                features: new GeoJSON().readFeatures(geojsonObject, {
-                  featureProjection: get("EPSG:3857"),
-                }),
-              })}
-              style={FeatureStyles.MultiPolygon}
-            />
-          )}
-          {showLayer2 && (
-            <VectorLayer
-              source={vector({
-                features: new GeoJSON().readFeatures(geojsonObject2, {
-                  featureProjection: get("EPSG:3857"),
-                }),
-              })}
-              style={FeatureStyles.MultiPolygon}
-            />
-          )} */}
             {showMarker && <VectorLayer source={vector({ features })} />}
           </Layers>
           <Controls>
             <FullScreenControl />
           </Controls>
         </Map>
-        {/* <div>
-        <input
-          type="checkbox"
-          checked={showLayer1}
-          onChange={(event) => setShowLayer1(event.target.checked)}
-        />
-        Johnson County
-      </div>
-      <div>
-        <input
-          type="checkbox"
-          checked={showLayer2}
-          onChange={(event) => setShowLayer2(event.target.checked)}
-        />
-        Wyandotte County
-      </div> */}
-        <hr />
-        <div>
-          <input
-            type="checkbox"
-            checked={showMarker}
-            onChange={(event) => setShowMarker(event.target.checked)}
-          />
-          Show markers
-        </div>
-        <div>
-          <input
-            onChange={(event) => setApoint(event.target.value)}
-          />
-          Ввести координаты точки А
-        </div>
-        <div>
-          <input
-            onChange={(event) => setBpoint(event.target.value)}
-          />
-          Ввести координаты точки В
-        </div>
-        <button onClick={() => onAddCoordinatesOnMap(aPoint, bPoint)}>Добавить координаты точек на карту</button>
       </div>
     </div>
   );
