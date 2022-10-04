@@ -38,6 +38,7 @@ const App = () => {
   const listItems = data.items;
   const [showMarker, setShowMarker] = useState(false);
   const [features, setFeatures] = useState();
+  const [activeItem, setActiveItem] = useState();
 
   const onAddCoordinatesOnMap = (a, b) => {
     const aNumX = a?.split(',')[0];
@@ -58,6 +59,8 @@ const App = () => {
               pointA={item.pointA}
               pointB={item.pointB}
               key={item.key}
+              activeItem={activeItem}
+              setActiveItem={setActiveItem}
             />)
         }
       </div>

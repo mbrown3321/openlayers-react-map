@@ -5,10 +5,19 @@
     color: white;
 }
 
-.itemWrapper {
+.notActiveItem {
     width: 400px;
     background-color: cadetblue;
     border: 1px solid black;
     margin-bottom: 10px;
     padding: 10px;
+    background-color: rgb(219, 179, 179);
+}
+
+.activeItem {
+    width: 400px;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: rgb(110, 136, 23);
 }
