@@ -19,9 +19,8 @@
     margin-bottom: 10px;
 }
 
-
 h4 {
-    color: whitesmoke;
+    color: white;
     margin-top: 5px;
 }
 
@@ -32,6 +31,7 @@ h4 {
 .ol-map {
     margin: 0;
     margin-left: 20px;
+    border: 1px solid;
 }
 
 .showPointsCheckbox {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Map from "./Map";
 import { Layers, TileLayer, VectorLayer } from "./Layers";
 import { Style, Icon } from "ol/style";
@@ -6,13 +6,12 @@ import Feature from "ol/Feature";
 import Point from "ol/geom/Point";
 import { osm, vector } from "./Source";
 import { fromLonLat, get } from "ol/proj";
-import GeoJSON from "ol/format/GeoJSON";
 import { Controls, FullScreenControl } from "./Controls";
-import FeatureStyles from "./Features/Styles";
-// import ListItemWrapper from "./List/ListItemWrapper";
 import mapConfig from "./config.json";
 import "./App.css";
 import * as data from './List/deliveryItems.json';
+import { EachItem } from "./List/EachItem";
+
 
 
 const geojsonObject = mapConfig.geojsonObject;
@@ -63,40 +62,11 @@ const App = () => {
     setFeatures(addMarkers([[Number(aNumX), Number(aNumY)], [Number(bNumX), Number(bNumY)]]));
   }
 
-  const EachItem = ({ pointA, pointB, indexItem }) => {
-    const [aPoint, setApoint] = useState(pointA);
-    const [bPoint, setBpoint] = useState(pointB);
-    return (
-      <div className="listItemWrapper">
-        <h4>{`Delivery item ${indexItem}`}</h4>
-        <div className="wrapper">
-          <div>
-            <input
-              placeholder={pointA}
-              value={pointA}
-              onChange={(event) => setApoint(event.target.value)}
-            />
-            Координаты точки А
-          </div>
-          <div>
-            <input
-              placeholder={pointB}
-              value={pointB}
-              onChange={(event) => setBpoint(event.target.value)}
-            />
-            Координаты точки В
-          </div>
-        </div>
-        <button onClick={() => onAddCoordinatesOnMap(aPoint, bPoint)}>Добавить координаты на карту</button>
-      </div>
-    )
-  }
-
   return (
     <div className='deliveryPage'>
       <div className='list'>
         {
-          listItems.map((item, index) => <EachItem indexItem={index + 1} pointA={item.pointA} pointB={item.pointB} />)
+          listItems.map((item, index) => <EachItem onAddCoordinatesOnMap={onAddCoordinatesOnMap} indexItem={index + 1} pointA={item.pointA} pointB={item.pointB} />)
         }
       </div>
       <div>
