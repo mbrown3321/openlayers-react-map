@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import './ListItem.css';
+
+import './EachItem.css';
 
 export const EachItem = ({ onAddCoordinatesOnMap, pointA, pointB, indexItem }) => {
     const [aPoint, setApoint] = useState(pointA);
