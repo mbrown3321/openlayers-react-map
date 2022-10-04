@@ -20,7 +20,6 @@ const geojsonObject2 = mapConfig.geojsonObject2;
 // const markersLonLat = [mapConfig.kansasCityLonLat, mapConfig.blueSpringsLonLat];
 
 function addMarkers(lonLatArray) {
-  console.log('lonLatArray ', lonLatArray)
   var iconStyle = new Style({
     image: new Icon({
       anchorXUnits: "fraction",
@@ -53,13 +52,8 @@ const App = () => {
   const [deliveryItems, setDeliveryItems] = useState(listItems);
 
   const markersLonLat = [mapConfig.kansasCityLonLat, mapConfig.blueSpringsLonLat];
-  // const [features, setFeatures] = useState(addMarkers(markersLonLat));
   const [features, setFeatures] = useState();
-  const [featuresNew, setNewFeatures] = useState(features);
 
-
-  // const [aPoint, setApoint] = useState('');
-  // const [bPoint, setBpoint] = useState('');
 
   const onAddCoordinatesOnMap = (a, b) => {
     const aNumX = a?.split(',')[0];
@@ -73,7 +67,6 @@ const App = () => {
     const eachItem = item.item;
     const [aPoint, setApoint] = useState(eachItem.pointA);
     const [bPoint, setBpoint] = useState(eachItem.pointB);
-    const [eachMarker, setEachMarker] = useState(false);
     item.item.pointA = aPoint;
     item.item.pointB = bPoint;
     return (
@@ -99,17 +92,6 @@ const App = () => {
             </div>
           </div>
           <button onClick={() => onAddCoordinatesOnMap(aPoint, bPoint)}>Добавить координаты точек на карту</button>
-          <div>
-            <input
-              type="checkbox"
-              checked={eachMarker}
-              onChange={(event) => {
-                setShowMarker(event.target.checked)
-                setEachMarker(showMarker)
-              }}
-            />
-            Показать точки на карте
-          </div>
         </div>
       </div>
     )
@@ -119,11 +101,10 @@ const App = () => {
     <div className='deliveryPage'>
       <div className='list'>
         {
-          listItems.map((item) => <EachItem item={item} key={item.key} />)
+          listItems.map((item) => <EachItem flag={item.isPointsShown} item={item} key={item.key} />)
         }
       </div>
       <div>
-        <hr />
         <Map center={fromLonLat(center)} zoom={zoom}>
           <Layers>
             <TileLayer source={osm()} zIndex={0} />
@@ -133,6 +114,15 @@ const App = () => {
             <FullScreenControl />
           </Controls>
         </Map>
+        <hr />
+        <div>
+          <input
+            type="checkbox"
+            checked={showMarker}
+            onChange={(event) => setShowMarker(event.target.checked)}
+          />
+          Показать добавленные точки на карте
+        </div>
       </div>
     </div>
   );
