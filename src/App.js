@@ -63,29 +63,26 @@ const App = () => {
     setFeatures(addMarkers([[Number(aNumX), Number(aNumY)], [Number(bNumX), Number(bNumY)]]));
   }
 
-  const EachItem = (item) => {
-    const eachItem = item.item;
-    const [aPoint, setApoint] = useState(eachItem.pointA);
-    const [bPoint, setBpoint] = useState(eachItem.pointB);
-    item.item.pointA = aPoint;
-    item.item.pointB = bPoint;
+  const EachItem = ({ pointA, pointB, key }) => {
+    const [aPoint, setApoint] = useState(pointA);
+    const [bPoint, setBpoint] = useState(pointB);
     return (
       <div className="listItemWrapper">
         <div >
-          <h4>first delivery item</h4>
+          <h4>{`Delivery item ${key}`}</h4>
           <div className="wrapper">
             <div>
               <input
-                placeholder={eachItem.pointA}
-                value={item.item.pointA}
+                placeholder={pointA}
+                value={pointA}
                 onChange={(event) => setApoint(event.target.value)}
               />
               Ввести координаты точки А
             </div>
             <div>
               <input
-                placeholder={eachItem.pointB}
-                value={item.item.pointB}
+                placeholder={pointB}
+                value={pointB}
                 onChange={(event) => setBpoint(event.target.value)}
               />
               Ввести координаты точки В
@@ -101,7 +98,7 @@ const App = () => {
     <div className='deliveryPage'>
       <div className='list'>
         {
-          listItems.map((item) => <EachItem flag={item.isPointsShown} item={item} key={item.key} />)
+          listItems.map((item) => <EachItem key={item.key} pointA={item.pointA} pointB={item.pointB} />)
         }
       </div>
       <div>
