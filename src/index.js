@@ -4,11 +4,11 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import './index.css';
+import cn from './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <div className='logisticPage'>
+    <div className={cn.logisticPage}>
       <App />
     </div>
   </React.StrictMode>,

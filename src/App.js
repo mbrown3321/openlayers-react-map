@@ -12,7 +12,7 @@ import mapConfig from "./config.json";
 import * as data from './deliveryItems.json';
 import { EachItem } from "./Item/EachItem";
 
-import "./App.scss";
+import cn from "./App.module.scss";
 
 const addMarkers = (lonLatArray) => {
   const iconStyle = new Style({
@@ -48,8 +48,8 @@ const App = () => {
   }
 
   return (
-    <div className='deliveryPage'>
-      <div className='list'>
+    <div className={cn.deliveryPage}>
+      <div className={cn.list}>
         {
           listItems.map((item, index) =>
             <EachItem
@@ -70,7 +70,7 @@ const App = () => {
             <FullScreenControl />
           </Controls>
         </Map>
-        <div className='showPointsCheckbox'>
+        <div className={cn.showCheckbox}>
           <input
             type="checkbox"
             checked={showMarker}

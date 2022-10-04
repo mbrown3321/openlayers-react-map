@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
-import './EachItem.scss';
+import cn from './EachItem.module.scss';
 
 export const EachItem = ({ onAddCoordinatesOnMap, pointA, pointB, indexItem }) => {
     const [aPoint, setApoint] = useState(pointA);
     const [bPoint, setBpoint] = useState(pointB);
     return (
-        <div className="listItemWrapper">
+        <div className={cn.itemWrapper}>
             <h4>{`Заявка на доставку №${indexItem}`}</h4>
-            <div className="wrapper">
+            <div className={cn.pointsWrapper}>
                 <div>
                     <input
                         placeholder={pointA}
@@ -26,7 +26,9 @@ export const EachItem = ({ onAddCoordinatesOnMap, pointA, pointB, indexItem }) =
                     Координаты точки В
                 </div>
             </div>
-            <button onClick={() => onAddCoordinatesOnMap(aPoint, bPoint)}>Добавить координаты на карту</button>
+            <button onClick={() => onAddCoordinatesOnMap(aPoint, bPoint)}>
+                Добавить координаты на карту
+            </button>
         </div>
     )
 }

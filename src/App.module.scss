@@ -21,15 +21,16 @@
 h4 {
     color: white;
     margin-top: 5px;
+    margin-bottom: 10px;
 }
 
-.ol-map {
+[class*="ol-map"] {
     margin: 0;
     margin-left: 20px;
     border: 1px solid;
 }
 
-.showPointsCheckbox {
+.showCheckbox {
     margin-left: 20px;
     margin-top: 20px;
 }
