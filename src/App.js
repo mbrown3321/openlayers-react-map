@@ -12,7 +12,7 @@ import mapConfig from "./config.json";
 import * as data from './deliveryItems.json';
 import { EachItem } from "./Item/EachItem";
 
-import "./App.css";
+import "./App.scss";
 
 const addMarkers = (lonLatArray) => {
   const iconStyle = new Style({

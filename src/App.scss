@@ -1,31 +1,26 @@
 .deliveryPage {
     display: flex;
+    padding: 10px;
 }
 
 .wrapper {
     margin-bottom: 10px;
-}
-
-.wrapper div {
-    font-size: 10pt;
+    div {
+        font-size: 10pt;
+    }
 }
 
 .listItemWrapper {
     padding: 10px;
     margin-bottom: 5px;
-}
-
-.listItemWrapper button {
-    margin-bottom: 10px;
+    button {
+        margin-bottom: 10px;
+    }
 }
 
 h4 {
     color: white;
     margin-top: 5px;
-}
-
-.deliveryPage {
-    padding: 10px;
 }
 
 .ol-map {
