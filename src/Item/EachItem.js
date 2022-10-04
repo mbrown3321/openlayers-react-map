@@ -7,7 +7,7 @@ export const EachItem = ({ onAddCoordinatesOnMap, pointA, pointB, indexItem }) =
     const [bPoint, setBpoint] = useState(pointB);
     return (
         <div className={cn.itemWrapper}>
-            <h4>{`Заявка на доставку №${indexItem}`}</h4>
+            <h4>{`Заявка на перевозку №${indexItem}`}</h4>
             <div className={cn.pointsWrapper}>
                 <div>
                     <input
@@ -15,7 +15,7 @@ export const EachItem = ({ onAddCoordinatesOnMap, pointA, pointB, indexItem }) =
                         value={pointA}
                         onChange={(event) => setApoint(event.target.value)}
                     />
-                    Координаты точки А
+                    Точка погрузки
                 </div>
                 <div>
                     <input
@@ -23,7 +23,7 @@ export const EachItem = ({ onAddCoordinatesOnMap, pointA, pointB, indexItem }) =
                         value={pointB}
                         onChange={(event) => setBpoint(event.target.value)}
                     />
-                    Координаты точки В
+                    Точка разгрузки
                 </div>
             </div>
             <button onClick={() => onAddCoordinatesOnMap(aPoint, bPoint)}>

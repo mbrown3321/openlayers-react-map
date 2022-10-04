@@ -57,6 +57,7 @@ const App = () => {
               indexItem={index + 1}
               pointA={item.pointA}
               pointB={item.pointB}
+              key={item.key}
             />)
         }
       </div>
