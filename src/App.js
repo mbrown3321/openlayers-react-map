@@ -63,33 +63,31 @@ const App = () => {
     setFeatures(addMarkers([[Number(aNumX), Number(aNumY)], [Number(bNumX), Number(bNumY)]]));
   }
 
-  const EachItem = ({ pointA, pointB, key }) => {
+  const EachItem = ({ pointA, pointB, indexItem }) => {
     const [aPoint, setApoint] = useState(pointA);
     const [bPoint, setBpoint] = useState(pointB);
     return (
       <div className="listItemWrapper">
-        <div >
-          <h4>{`Delivery item ${key}`}</h4>
-          <div className="wrapper">
-            <div>
-              <input
-                placeholder={pointA}
-                value={pointA}
-                onChange={(event) => setApoint(event.target.value)}
-              />
-              Ввести координаты точки А
-            </div>
-            <div>
-              <input
-                placeholder={pointB}
-                value={pointB}
-                onChange={(event) => setBpoint(event.target.value)}
-              />
-              Ввести координаты точки В
-            </div>
+        <h4>{`Delivery item ${indexItem}`}</h4>
+        <div className="wrapper">
+          <div>
+            <input
+              placeholder={pointA}
+              value={pointA}
+              onChange={(event) => setApoint(event.target.value)}
+            />
+            Координаты точки А
           </div>
-          <button onClick={() => onAddCoordinatesOnMap(aPoint, bPoint)}>Добавить координаты точек на карту</button>
+          <div>
+            <input
+              placeholder={pointB}
+              value={pointB}
+              onChange={(event) => setBpoint(event.target.value)}
+            />
+            Координаты точки В
+          </div>
         </div>
+        <button onClick={() => onAddCoordinatesOnMap(aPoint, bPoint)}>Добавить координаты на карту</button>
       </div>
     )
   }
@@ -98,7 +96,7 @@ const App = () => {
     <div className='deliveryPage'>
       <div className='list'>
         {
-          listItems.map((item) => <EachItem key={item.key} pointA={item.pointA} pointB={item.pointB} />)
+          listItems.map((item, index) => <EachItem indexItem={index + 1} pointA={item.pointA} pointB={item.pointB} />)
         }
       </div>
       <div>
@@ -111,8 +109,7 @@ const App = () => {
             <FullScreenControl />
           </Controls>
         </Map>
-        <hr />
-        <div>
+        <div className='showPointsCheckbox'>
           <input
             type="checkbox"
             checked={showMarker}

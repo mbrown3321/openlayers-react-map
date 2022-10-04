@@ -1,3 +1,40 @@
-.deliveryPage{
+.deliveryPage {
     display: flex;
+}
+
+.wrapper {
+    margin-bottom: 10px;
+}
+
+.wrapper div {
+    font-size: 10pt;
+}
+
+.listItemWrapper {
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.listItemWrapper button {
+    margin-bottom: 10px;
+}
+
+
+h4 {
+    color: whitesmoke;
+    margin-top: 5px;
+}
+
+.deliveryPage {
+    padding: 10px;
+}
+
+.ol-map {
+    margin: 0;
+    margin-left: 20px;
+}
+
+.showPointsCheckbox {
+    margin-left: 20px;
+    margin-top: 20px;
 }
