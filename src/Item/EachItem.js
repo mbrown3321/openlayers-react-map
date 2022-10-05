@@ -2,14 +2,19 @@ import React, { useState } from "react";
 
 import cn from './EachItem.module.scss';
 
-export const EachItem = ({ onAddCoordinatesOnMap, pointA, pointB, indexItem, activeItem, setActiveItem }) => {
+export const EachItem = ({ onAddCoordinatesOnMap, pointA, pointB, indexItem, activeItem, setActiveItem, setShowMarker }) => {
     const [aPoint, setApoint] = useState(pointA);
     const [bPoint, setBpoint] = useState(pointB);
-    return (
-        <div className={activeItem === indexItem ? cn.activeItem : cn.notActiveItem} onClick={() => {
+    const onItemClick = () => {
+        setActiveItem(indexItem);
+        setTimeout(() => {
             onAddCoordinatesOnMap(aPoint, bPoint);
-            setActiveItem(indexItem)
-        }}>
+            setShowMarker(true);
+        }, 100)
+    }
+    return (
+        <div className={activeItem === indexItem ? cn.activeItem : cn.notActiveItem}
+            onClick={onItemClick}>
             <h4>{`Заявка на перевозку №${indexItem}`}</h4>
             <div className={cn.pointsWrapper}>
                 <div>

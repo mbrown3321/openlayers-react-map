@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Map from "./Map";
 import { Layers, TileLayer, VectorLayer } from "./Layers";
@@ -48,6 +48,8 @@ const App = () => {
     setFeatures(addMarkers([[Number(aNumX), Number(aNumY)], [Number(bNumX), Number(bNumY)]]));
   }
 
+  useEffect(() => activeItem && setShowMarker(false), [activeItem])
+
   return (
     <div className={cn.deliveryPage}>
       <div className={cn.list}>
@@ -61,6 +63,7 @@ const App = () => {
               key={item.key}
               activeItem={activeItem}
               setActiveItem={setActiveItem}
+              setShowMarker={setShowMarker}
             />)
         }
       </div>
@@ -74,14 +77,6 @@ const App = () => {
             <FullScreenControl />
           </Controls>
         </Map>
-        <div className={cn.showCheckbox}>
-          <input
-            type="checkbox"
-            checked={showMarker}
-            onChange={(event) => setShowMarker(event.target.checked)}
-          />
-          Показать добавленные точки на карте
-        </div>
       </div>
     </div>
   );
