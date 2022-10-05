@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import cn from './EachItem.module.scss';
 
@@ -12,6 +12,15 @@ export const EachItem = ({ onAddCoordinatesOnMap, pointA, pointB, indexItem, act
             setShowMarker(true);
         }, 100)
     }
+    useEffect(() => {
+        if (aPoint != pointA || bPoint != pointB) {
+            setShowMarker(false);
+            setTimeout(() => {
+                onAddCoordinatesOnMap(aPoint, bPoint);
+                setShowMarker(true);
+            }, 100)
+        }
+    }, [aPoint, bPoint])
     return (
         <div className={activeItem === indexItem ? cn.activeItem : cn.notActiveItem}
             onClick={onItemClick}>
@@ -20,7 +29,7 @@ export const EachItem = ({ onAddCoordinatesOnMap, pointA, pointB, indexItem, act
                 <div>
                     <input
                         placeholder={pointA}
-                        value={pointA}
+                        value={aPoint}
                         onChange={(event) => setApoint(event.target.value)}
                     />
                     Точка погрузки
@@ -28,7 +37,7 @@ export const EachItem = ({ onAddCoordinatesOnMap, pointA, pointB, indexItem, act
                 <div>
                     <input
                         placeholder={pointB}
-                        value={pointB}
+                        value={bPoint}
                         onChange={(event) => setBpoint(event.target.value)}
                     />
                     Точка разгрузки
