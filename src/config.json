@@ -1,71 +1,117 @@
 {
-    "center": [-94.9065, 38.9884],
-    "geojsonObject": {
-        "type": "FeatureCollection",
-        "features": [
-          {
-            "type": "Feature",
-            "properties": {
-              "kind": "county",
-              "name": "Wyandotte",
-              "state": "KS"
-            },
-            "geometry": {
-              "type": "MultiPolygon",
-              "coordinates": [
-                [
-                  [
-                    [-94.8627, 39.202],
-                    [-94.901, 39.202],
-                    [-94.9065, 38.9884],
-                    [-94.8682, 39.0596],
-                    [-94.6053, 39.0432],
-                    [-94.6053, 39.1144],
-                    [-94.5998, 39.1582],
-                    [-94.7422, 39.1691],
-                    [-94.7751, 39.202],
-                    [-94.8627, 39.202]
-                  ]
-                ]
-              ]
-            }
-          }
-        ]
+  "center": [4.588908805135991, 52.17487218661314],
+  "bbox": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "kind": "county",
+          "name": "Wyandotte",
+          "state": "KS"
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [4.744193915907338, 52.28244876538299],
+              [4.744193915907338, 52.445516139660064],
+              [4.957827854887069, 52.445516139660064],
+              [4.957827854887069, 52.28244876538299]
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  "points": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "lineNumber": 420
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [4.888908805135991, 52.37487218661314]
+        }
       },
-      "geojsonObject2": {
-        "type": "FeatureCollection",
-        "features": [
-          {
-            "type": "Feature",
-            "properties": {
-              "kind": "county",
-              "name": "Johnson",
-              "state": "KS"
-            },
-            "geometry": {
-              "type": "MultiPolygon",
-              "coordinates": [
-                [
-                  [
-                    [-94.9065, 38.9884],
-                    [-95.0544, 38.9829],
-                    [-95.0544, 38.7365],
-                    [-94.9668, 38.7365],
-                    [-94.6108, 38.7365],
-                    [-94.6108, 38.846],
-                    [-94.6053, 39.0432],
-                    [-94.8682, 39.0596],
-                    [-94.9065, 38.9884]
-                  ]
-                ]
-              ]
-            }
-          }
-        ]
+      {
+        "type": "Feature",
+        "properties": {
+          "lineNumber": 420
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [4.882940015240352, 52.3781949980558]
+        }
       },
-    "kansasCityLonLat": [-94.579228, 39.135386],
-    "blueSpringsLonLat": [-94.279851, 39.03412],
-    "markerImage24" : "https://cdn2.iconfinder.com/data/icons/social-media-and-payment/64/-47-24.png",
-    "markerImage32" : "https://cdn2.iconfinder.com/data/icons/social-media-and-payment/64/-47-32.png",
-    "markerImage64" : "https://cdn2.iconfinder.com/data/icons/social-media-and-payment/64/-47-64.png"
+      {
+        "type": "Feature",
+        "properties": {
+          "lineNumber": 2137
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [4.890346170869963, 52.367949465219965]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "lineNumber": 2137
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [4.832546963734335, 52.84446287524388]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "lineNumber": 2137
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [4.528843784779247, 52.35483438270687]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "lineNumber": 2137
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [4.8879851749141645, 52.156196515047405]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "lineNumber": 2137
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [5.21851696236331, 52.714772003217774]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "lineNumber": 2137
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [4.831589618217228, 52.39340005681691]
+        }
+      }
+    ]
+  },
+  "kansasCityLonLat": [-94.579228, 39.135386],
+  "blueSpringsLonLat": [-94.279851, 39.03412],
+  "markerImage24": "https://cdn2.iconfinder.com/data/icons/social-media-and-payment/64/-47-24.png",
+  "markerImage32": "https://cdn2.iconfinder.com/data/icons/social-media-and-payment/64/-47-32.png",
+  "markerImage64": "https://cdn2.iconfinder.com/data/icons/social-media-and-payment/64/-47-64.png"
 }

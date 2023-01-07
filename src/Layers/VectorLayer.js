@@ -1,29 +1,32 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import MapContext from "../Map/MapContext";
 import OLVectorLayer from "ol/layer/Vector";
 
 const VectorLayer = ({ source, style, zIndex = 0 }) => {
-	const { map } = useContext(MapContext);
+  const { map } = useContext(MapContext);
+  const layer = useMemo(
+    () =>
+      new OLVectorLayer({
+        source,
+        style,
+      }),
+    [source, style]
+  );
 
-	useEffect(() => {
-		if (!map) return;
+  useEffect(() => {
+    if (!map) return;
 
-		let vectorLayer = new OLVectorLayer({
-			source,
-			style
-		});
+    map.addLayer(layer);
+    layer.setZIndex(zIndex);
 
-		map.addLayer(vectorLayer);
-		vectorLayer.setZIndex(zIndex);
+    return () => {
+      if (map) {
+        map.removeLayer(layer);
+      }
+    };
+  }, [map, layer]);
 
-		return () => {
-			if (map) {
-				map.removeLayer(vectorLayer);
-			}
-		};
-	}, [map]);
-
-	return null;
+  return null;
 };
 
 export default VectorLayer;
